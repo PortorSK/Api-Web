@@ -36,7 +36,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Purchase.prototype, "totalProductos", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)({ name: 'fechaCreacion', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
+    (0, typeorm_1.CreateDateColumn)({ name: 'fechaCreacion', type: 'timestamp' }),
     __metadata("design:type", Date)
 ], Purchase.prototype, "fechaCreacion", void 0);
 __decorate([
@@ -44,7 +44,7 @@ __decorate([
     __metadata("design:type", String)
 ], Purchase.prototype, "usuarioCreacion", void 0);
 __decorate([
-    (0, typeorm_1.UpdateDateColumn)({ name: 'fechaActualizacion', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
+    (0, typeorm_1.UpdateDateColumn)({ name: 'fechaActualizacion', type: 'timestamp' }),
     __metadata("design:type", Date)
 ], Purchase.prototype, "fechaActualizacion", void 0);
 __decorate([

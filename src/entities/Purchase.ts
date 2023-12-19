@@ -18,13 +18,13 @@ export class Purchase {
   @Column({ name: 'totalProductos', type: 'int' })
   totalProductos!: number;
 
-  @CreateDateColumn({ name: 'fechaCreacion', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ name: 'fechaCreacion', type: 'timestamp' })
   fechaCreacion!: Date;
 
   @Column({ name: 'usuarioCreacion', type: 'varchar', length: 255 })
   usuarioCreacion!: string;
 
-  @UpdateDateColumn({ name: 'fechaActualizacion', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn({ name: 'fechaActualizacion', type: 'timestamp'})
   fechaActualizacion!: Date;
 
   @Column({ name: 'usuarioActualizacion', type: 'varchar', length: 255 })

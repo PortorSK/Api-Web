@@ -6,13 +6,12 @@ import { Purchase } from './entities/Purchase'; // Ajusta la ruta según tu estr
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
-  host: 'localhost',
-  username: 'root',
-  password: '12345',
+  host: '18.227.46.136',
+  username: 'papu',
+  password: 'papuman',
   database: 'farmacos',
   port: 3306,
   entities: [users, products, PromotionalProduct, Purchase], // Agrega la entidad User aquí
   logging: true,
-  synchronize: false,
+  synchronize: true,
 });
-
