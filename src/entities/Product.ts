@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
-export class Product {
+export class products {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -24,7 +24,7 @@ export class Product {
   cantidadEnExistencia!: number;
 
   @Column()
-  unidadDeMedida!: string;
+  unidadMedida!: string;
 
   @CreateDateColumn()
   fechaCreacion!: Date;
@@ -41,10 +41,9 @@ export class Product {
   @Column()
   activo!: boolean;
 
-  // Agregar dos campos adicionales
   @Column()
-  campoAdicional1!: string;
+  dosis!: string;
 
   @Column()
-  campoAdicional2!: string;
+  presentacion!: string;
 }

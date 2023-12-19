@@ -1,38 +1,37 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
-export class User {
+export class users {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ default: 'default_user' }) // O asignar el usuario que está creando el registro
   nombre!: string;
 
-  @Column()
+  @Column({ default: 'default_user' }) // O asignar el usuario que está creando el registro
   correoElectronico!: string;
 
-  @Column()
-  contraseña!: string;
+  @Column({ default: 'default_user' }) // O asignar el usuario que está creando el registro
+  contrasena!: string;
 
-  @CreateDateColumn()
+  @Column({ default: () => 'CURRENT_TIMESTAMP' }) // Puedes usar el valor por defecto que necesites
   fechaCreacion!: Date;
 
-  @Column()
+  @Column({ default: 'default_user' }) // O asignar el usuario que está creando el registro
   usuarioCreacion!: string;
 
-  @UpdateDateColumn()
+  @Column({ nullable: true, default: null }) // Puedes usar el valor por defecto que necesites o null si es nullable
   fechaActualizacion!: Date;
 
-  @Column()
+  @Column({ nullable: true, default: null })
   usuarioActualizacion!: string;
-
-  @Column()
+  
+  @Column({ nullable: true, default: null })
   activo!: boolean;
 
-  // Agregar dos campos adicionales
-  @Column()
-  campoAdicional1!: string;
+  @Column({ nullable: true, default: null })
+  estadocivil!: string;
 
-  @Column()
-  campoAdicional2!: string;
+  @Column({ nullable: true, default: null })
+  edad!: number;
 }

@@ -1,35 +1,42 @@
 // authController.ts
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
-import { User } from '../entities/user';
+import { AppDataSource } from '../db';
+import { users } from '../entities/user';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-class AuthController {
-  async login(req: Request, res: Response) {
-    const { correoElectronico, contraseña } = req.body;
+export async function login(req: Request, res: Response): Promise<Response> {
+  const { correoElectronico, contrasena } = req.body;
 
+  try {
     // Obtén el usuario por su correo electrónico
-    const userRepository = getRepository(User);
-    const user = await userRepository.findOne({ where: { correoElectronico } });
+    const user = await AppDataSource.manager.findOne(users, { where: { correoElectronico } });
 
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-
+    var passwordMatch = true
     // Verifica la contraseña
-    const passwordMatch = await bcrypt.compare(contraseña, user.contraseña);
+    if(contrasena==user.contrasena)
+    {
+        passwordMatch = true
+    }
+    else
+    {
+        passwordMatch = false
+    }
 
-    if (!passwordMatch) {
-      return res.status(401).json({ message: 'Contraseña incorrecta' });
+    if (passwordMatch==false) {
+      return res.status(401).json({ message: contrasena+" "+user.contrasena});
     }
 
     // Genera el token JWT
     const token = jwt.sign({ userId: user.id }, 'tu_secreto', { expiresIn: '1h' });
 
     // Devuelve el token como respuesta
-    res.json({ token });
+    return res.json({ token });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error interno del servidor', error: error });
   }
 }
-
-export const authController = new AuthController();

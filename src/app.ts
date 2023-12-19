@@ -1,17 +1,32 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import routes from './routes/Routes'; // Importa las rutas directamente
+import morgan from 'morgan';
+import cors from 'cors';
+import userRoutes from './routes/userRoutes'; // Asegúrate de tener la ruta correcta
+import productRoutes from './routes/productsRoutes'; // Asegúrate de tener la ruta correcta
+import authRoutes from './routes/authRoutes'; // Importa las rutas de Auth
+import promotionalproductsRoutes from './routes/promotionalproductRoutes'; // Importa las rutas de Auth
+import purchaseRoutes from './routes/purchaseRoutes'; // Importa las rutas de Auth
 
-import './utils/database'; // Importa la conexión a la base de datos
 
 const app = express();
-const port = 3000;
 
-app.use(bodyParser.json());
+// Configuración de CORS
+const corsOptions = {
+  origin: '*', // Esto permitirá el acceso desde cualquier dominio
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
 
-// Usa las rutas directamente
-app.use(routes);
+app.use(morgan('dev'));
+app.use(cors(corsOptions));
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-});
+// Usa las rutas específicas para los usuarios
+app.use(userRoutes);
+app.use(productRoutes);
+app.use(authRoutes);
+app.use(promotionalproductsRoutes);
+app.use(purchaseRoutes);
+
+export default app;
